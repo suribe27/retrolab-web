@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Noto_Serif } from "next/font/google";
+import { Footer } from "@/src/features/common/components/Footer";
+import { Navbar } from "@/src/features/common/components/Navbar";
 import "./globals.css";
 
 const notoSerif = Noto_Serif({
@@ -25,7 +27,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="es">
       <body className={`${notoSerif.variable} ${inter.variable} flex min-h-screen flex-col`}>
+        <Navbar />
         <main className="flex-1">{children}</main>
+        <Footer />
       </body>
     </html>
   );
