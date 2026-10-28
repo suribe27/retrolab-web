@@ -1,16 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
-  cacheComponents: true,
-  partialPrefetching: true,
-  turbopack: {
-    rules: {
-      "*.css": {
-        loaders: ["@tailwindcss/turbopack"],
-        as: "*.css",
-      },
-    },
+  images: {
+    // Las fotos del catálogo viven en Cloudinary; el admin puede usar otras URLs https
+    remotePatterns: [{ protocol: "https", hostname: "**" }],
   },
 };
 
