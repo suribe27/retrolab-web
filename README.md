@@ -2,7 +2,7 @@
 
 El sitio de **RetroLab** de la Entrega 1 (tienda de camisetas retro de fútbol), reconstruido en **Next.js (App Router) + TypeScript + Tailwind**. El catálogo, el formulario y las cuentas de usuario se conectan con la API propia.
 
-- **Sitio en Vercel:** _(pega aquí la URL de Vercel)_
+- **Sitio en Vercel:** https://retrolab-web.vercel.app
 - **API en producción:** https://retrolab-api.onrender.com
 - **Repositorio del backend:** https://github.com/suribe27/retrolab-api
 
