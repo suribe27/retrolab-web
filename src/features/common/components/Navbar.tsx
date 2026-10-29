@@ -2,7 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useAuth } from "../../auth/hooks/useAuth";
 
 const LINKS = [
   { href: "/#hero", label: "Inicio" },
@@ -13,10 +15,18 @@ const LINKS = [
 const linkClase = "font-serif text-sm tracking-wider text-cream hover:text-clay";
 
 export function Navbar() {
+  const { user, status, isAdmin, logout } = useAuth();
+  const router = useRouter();
   const [abierto, setAbierto] = useState(false);
 
   function cerrarMenu() {
     setAbierto(false);
+  }
+
+  function salir() {
+    logout();
+    cerrarMenu();
+    router.push("/");
   }
 
   return (
@@ -59,6 +69,45 @@ export function Navbar() {
                 </Link>
               </li>
             ))}
+
+            {status === "authenticated" && user && (
+              <>
+                <li>
+                  <Link href="/mis-solicitudes" onClick={cerrarMenu} className={linkClase}>
+                    Mis solicitudes
+                  </Link>
+                </li>
+                {isAdmin && (
+                  <li>
+                    <Link href="/admin" onClick={cerrarMenu} className={linkClase}>
+                      Administración
+                    </Link>
+                  </li>
+                )}
+                <li className="text-sm text-clay">Hola, {user.nombre.split(" ")[0]}</li>
+                <li>
+                  <button
+                    type="button"
+                    onClick={salir}
+                    className="cursor-pointer rounded-retro border border-cream px-4 py-1.5 font-serif text-sm uppercase text-cream hover:bg-cream hover:text-navy"
+                  >
+                    Salir
+                  </button>
+                </li>
+              </>
+            )}
+
+            {status === "guest" && (
+              <li>
+                <Link
+                  href="/login"
+                  onClick={cerrarMenu}
+                  className="rounded-retro bg-cream px-4 py-1.5 font-serif text-sm uppercase text-navy hover:bg-clay"
+                >
+                  Ingresar
+                </Link>
+              </li>
+            )}
           </ul>
         </nav>
       </div>
